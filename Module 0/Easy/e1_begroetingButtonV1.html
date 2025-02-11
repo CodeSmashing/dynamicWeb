@@ -1,0 +1,18 @@
+<!-- E1: Begroeting Button
+
+Maak een webpagina met een knop die van tekst verandert als je erop klikt. De knop wisselt tussen "Hallo!" en "Tot ziens!".
+
+Maak dit op 3 verschillende manieren:
+
+1.    Met inline JavaScript
+2.    Met een <script> tag in je HTML
+3.    Met een extern JavaScript bestand
+ -->
+<button onclick="
+'use strict';
+const button = document.querySelector('button');
+let htmlText = button.textContent;
+
+if (htmlText == 'Hallo!') button.textContent = 'Tot ziens!';
+if (htmlText == 'Tot ziens!') button.textContent = 'Hallo!';
+">Hallo!</button>
