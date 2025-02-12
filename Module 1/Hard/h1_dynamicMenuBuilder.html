@@ -1,0 +1,194 @@
+<!-- H1: Dynamic Menu Builder
+
+Begin met deze HTML:
+
+<nav id="mainMenu"></nav>
+<div class="content">
+    <h1>Hoofdstuk 1</h1>
+    <h2>Deel 1.1</h2>
+    <h2>Deel 1.2</h2>
+    <h1>Hoofdstuk 2</h1>
+    <h2>Deel 2.1</h2>
+</div>
+
+Schrijf code die:
+• Automatisch een menu genereert in de nav gebaseerd op de h1 en h2 tags
+• Hoofdstukken (h1) moeten hoofditems worden
+• Delen (h2) moeten subitems worden onder het juiste hoofdstuk
+• Gebruik een combinatie van querySelector, getElementsByTagName en andere DOM methodes
+• Het menu moet klikbaar zijn en naar de juiste sectie scrollen
+
+Extra uitdaging:
+• Voeg een actieve status toe aan menu-items wanneer je bij die sectie bent
+• Maak submenu's die uitklappen wanneer je op een hoofdstuk klikt
+-->
+
+<nav id="mainMenu"></nav>
+<div class="content">
+	<h1>Hoofdstuk 1</h1>
+	<h2>Deel 1.1</h2>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
+		ducimus! Nihil eveniet, molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem
+		quidem temporibus assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+	<h2>Deel 1.2</h2>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
+		ducimus! Nihil eveniet, molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem
+		quidem temporibus assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+	<h1>Hoofdstuk 2</h1>
+	<h2>Deel 2.1</h2>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet,
+		molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus
+		assumenda consequuntur eligendi velit officia. Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic,
+		ducimus! Nihil eveniet, molestiae odio, repudiandae soluta nisi, explicabo itaque excepturi illo labore autem
+		quidem temporibus assumenda consequuntur eligendi velit officia.
+	</p>
+	<p>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ducimus! Nihil eveniet, molestiae odio,
+		repudiandae soluta nisi, explicabo itaque excepturi illo labore autem quidem temporibus assumenda consequuntur
+		eligendi velit officia.
+	</p>
+</div>
+
+<script>
+	"use strict";
+
+	const navigation = document.querySelector("nav");
+	const headers = {
+		h1: document.querySelectorAll("h1"),
+		h2: document.querySelectorAll("h2")
+	};
+
+	// Hoofdmenu maken
+	const ul = document.createElement("ul");
+	navigation.appendChild(ul);
+
+	// Bijhouden welke h1 we laatst hebben gezien
+	let currentH1Item;
+
+	// Door alle h1's en h2's gaan in volgorde
+	document.querySelectorAll("h1, h2").forEach(element => {
+		if (element.nodeName === "H1") {
+			// Hoofdstuk toevoegen
+			const li = document.createElement("li");
+			const a = document.createElement("a");
+
+			// ID maken als die er nog niet is
+			if (!element.id) {
+				element.id = element.textContent.toLowerCase().replace(/\s+/g, '-');
+			}
+
+			a.href = '#' + element.id;
+			a.textContent = element.textContent;
+			li.appendChild(a);
+
+			// Submenu container maken
+			const subl = document.createElement("ul");
+			li.appendChild(subl);
+
+			ul.appendChild(li);
+			currentH1Item = li;
+		} else if (element.tagName === "H2" && currentH1Item) {
+			// Subitem toevoegen
+			const subl = currentH1Item.querySelector("ul");
+			const li = document.createElement("li");
+			const a = document.createElement("a");
+
+			if (!element.id) {
+				element.id = element.textContent.toLowerCase().replace(/\s+/g, '-');
+			}
+
+			a.href = '#' + element.id;
+			a.textContent = element.textContent;
+			li.appendChild(a);
+			subl.appendChild(li);
+		}
+	});
+</script>
