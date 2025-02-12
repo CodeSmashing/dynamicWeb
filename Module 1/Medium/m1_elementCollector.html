@@ -1,0 +1,45 @@
+<!-- M1: Element Collector
+
+Werk met deze HTML:
+
+<div class="container">
+    <p class="special">Eerste paragraaf</p>
+    <p>Tweede paragraaf</p>
+    <p class="special">Derde paragraaf</p>
+    <span class="special">Een span</span>
+</div>
+<div id="output"></div>
+
+Schrijf code die:
+• Alle elementen met class "special" vindt en hun tekst rood maakt
+• De tweede paragraaf vindt en onderstreept
+• Het aantal gevonden "special" elementen toont in het output div
+• Gebruik verschillende selector methodes (getElementById, querySelector, etc.)
+-->
+<div class="container">
+    <p class="special">Eerste paragraaf</p>
+    <p>Tweede paragraaf</p>
+    <p class="special">Derde paragraaf</p>
+    <span class="special">Een span</span>
+</div>
+<div id="output"></div>
+
+<script>
+	const container = document.getElementsByClassName("container")[0];
+	const paragrafs = container.getElementsByTagName("p");
+	const specials = container.querySelectorAll(".special");
+	const output = document.querySelector("#output");
+	const outputElement = document.createElement("p");
+	outputElement.appendChild(document.createTextNode("Het aantal speciale elementen was: " + specials.length));
+
+	// 1.
+	specials.forEach((element) => {
+		element.style.color = "red";
+	});
+
+	// 2.
+	paragrafs[1].style.textDecorationLine = "underline";
+
+	// 3.
+	output.insertAdjacentElement("beforeend", outputElement);
+</script>
