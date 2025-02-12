@@ -1,0 +1,39 @@
+<!-- E1: Mini Quiz
+
+Maak een simpele quiz met alerts en prompts:
+
+    Vraag de gebruiker eerst om hun naam via prompt
+    Stel vervolgens 3 vragen over programmeren via prompts
+    Voor elk juist antwoord toon je een alert met "Goed gedaan!"
+    Voor elk fout antwoord toon je een alert met het juiste antwoord
+    Op het einde toon je een alert met de totaalscore
+
+// Voorbeeld start-code
+let naam = prompt("Wat is je naam?");
+// Stel hier je vragen...
+// Hou de score bij...
+// Toon het resultaat...
+-->
+<script>
+	"use strict";
+	const name = prompt("Wat is uw naam?", "Bob");
+	let score = 0;
+
+	const questions = [
+		{t: "Voor wat staat de afkorting DOM? (Sensitief!)", a: "Document Object Model"},
+		{t: "Voor wat staat de afkorting JS? (Sensitief!)", a: "JavaScript"},
+		{t: "Voor wat staat de afkorting HTML? (Sensitief!)", a: "Hypertext Markup Language"}
+	];
+
+	for (const question of questions) {
+		const answer = prompt(question.t);
+		if (question.a === answer) {
+			alert("Goed gedaan!");
+			score++;
+		} else {
+			alert("Het juiste antwoord is: " + question.a);
+		}
+	}
+
+	alert(name + ", uw score is: " + score);
+</script>
