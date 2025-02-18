@@ -1,0 +1,97 @@
+<!--
+M2: Interactive Color Grid
+
+Maak een interactief kleurenraster:
+• Een 5x5 grid van divs (gebruik CSS Grid of Flexbox)
+• Als je over een cel beweegt (hover) wordt deze rood
+• Als je klikt op een cel wordt deze blauw
+• Als je dubbelklikt op een cel wordt deze groen
+• Rechts van het grid toon je hoeveel cellen van elke kleur er zijn
+
+<div id="container">
+   <div id="grid">
+       <!- Hier komen de 25 cellen ->
+	</div>
+	<div id="stats">
+		<p>Rood: <span id="redCount">0</span></p>
+		<p>Blauw: <span id="blueCount">0</span></p>
+		<p>Groen: <span id="greenCount">0</span></p>
+	</div>
+</div>
+-->
+
+<style>
+	#grid {
+		display: grid;
+		grid-template-columns: 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr;
+		grid-template-rows: 0.3fr 0.3fr 0.3fr 0.3fr 0.3fr;
+		width: 500px;
+  		height: 500px;
+		gap: 1px;
+		border: 5px solid black;
+		border-radius: 4px;
+		box-shadow: 10px 10px 10px 4px gray;
+	}
+
+	#grid > * {
+		background-color: gray;
+		border: 1px solid black;
+		box-shadow: 0px 0px 10px -4px black;
+	}
+</style>
+
+<div id="container">
+   <div id="grid">
+       <!-- Hier komen de 25 cellen -->
+	</div>
+	<div id="stats">
+		<p>Rood: <span id="redCount">0</span></p>
+		<p>Blauw: <span id="blueCount">0</span></p>
+		<p>Groen: <span id="greenCount">0</span></p>
+	</div>
+</div>
+
+<script>
+	const redCount = document.querySelector("#redCount");
+	const blueCount = document.querySelector("#blueCount");
+	const greenCount = document.querySelector("#greenCount");
+
+	let numberOfCells = 25;
+	const grid = document.querySelector("#grid");
+
+	for (let i = 0; i < numberOfCells; i++) {
+		const cell = document.createElement("div");
+		grid.appendChild(cell);
+	}
+
+	function updateCounts() {
+		const cells = grid.querySelectorAll("div");
+
+		let red = 0, green = 0, blue = 0;
+
+		Array.from(cells).forEach(cell => {
+			if (cell.style.backgroundColor === "red") red++;
+			if (cell.style.backgroundColor === "green") green++;
+			if (cell.style.backgroundColor === "blue") blue++;
+		});
+
+		redCount.textContent = red;
+		greenCount.textContent = green;
+		blueCount.textContent = blue;
+	}
+
+	grid.addEventListener("mouseover", (e) => {
+		e.target.style.backgroundColor = "red";
+		updateCounts();
+	});
+
+	grid.addEventListener("click", (e) => {
+		e.target.style.backgroundColor = "blue";
+		updateCounts();
+	});
+
+	grid.addEventListener("dblclick", (e) => {
+		e.target.style.backgroundColor = "green";
+		updateCounts();
+	});
+</script>
