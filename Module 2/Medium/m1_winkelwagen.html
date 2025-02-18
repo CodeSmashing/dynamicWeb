@@ -1,0 +1,142 @@
+<!--
+M1: Winkelwagen
+
+Bouw een simpele winkelwagen waar je producten kunt toevoegen en verwijderen.
+HTML om mee te starten:
+
+<div id="shoppingCart">
+    <div id="addProduct">
+        <input type="text" id="productName" placeholder="Product naam">
+        <input type="number" id="productPrice" placeholder="Prijs">
+        <button id="addToCart">Voeg toe aan winkelwagen</button>
+    </div>
+
+    <div id="cartControls">
+        <button id="sortByPrice">Sorteer op prijs</button>
+        <p>Totaal: €<span id="total">0.00</span></p>
+    </div>
+
+    <ul id="cartItems"></ul>
+</div>
+
+Vereisten:
+• Gebruik een array van objecten voor de producten
+• Elk product moet een naam en prijs hebben
+• Gebruik array methods voor toevoegen, verwijderen en sorteren
+• Toon bij elk product een verwijder-knop
+• Update het totaal automatisch
+-->
+
+<style>
+	.card {
+		background-color: gray;
+		margin: 10px;
+		padding: 20px;
+	}
+
+	.remove {
+		background-color: aliceblue;
+	}
+</style>
+
+<div id="shoppingCart">
+    <div id="addProduct">
+        <input type="text" id="productName" placeholder="Product naam">
+        <input type="number" id="productPrice" placeholder="Prijs">
+        <button id="addToCart">Voeg toe aan winkelwagen</button>
+    </div>
+
+    <div id="cartControls">
+        <button id="sortByPrice">Sorteer op prijs</button>
+        <p>Totaal: €<span id="total">0.00</span></p>
+    </div>
+
+    <ul id="cartItems"></ul>
+</div>
+
+<script>
+	"use strict";
+
+	const inputName = document.querySelector("#productName");
+	const inputPrice = document.querySelector("#productPrice");
+	const inputButton = document.querySelector("#addToCart");
+	const sortButton = document.querySelector("#sortByPrice");
+	const outputTotals = document.querySelector("#total");
+	const outputItems = document.querySelector("#cartItems");
+	const productCart = [];
+	let totalCost = 0;
+
+	// Add new product items
+	inputButton.addEventListener("click", () => {
+		if (inputName.value !== "" && inputPrice.value !== "") {
+			if (!isNaN(inputPrice.value)) {
+				const newProduct = new product(inputName.value, inputPrice.value);
+				productCart.push(newProduct);
+				outputItems.appendChild(newProduct.card);
+				totalCost += newProduct.price;
+
+				outputTotals.textContent = totalCost;
+			} else {
+				alert("Your inputted price isn't recognized as a number.");
+			}
+		} else {
+			alert("One or more of the inputs were left empty.");
+		}
+	});
+
+	// Sort by price
+	sortButton.addEventListener("click", () => {
+		if (productCart.length != 0) {
+			productCart.sort((a, b) => a.price <= b.price);
+			updateResults();
+		} else {
+			alert("Can't sort an empty cart.");
+		}
+	});
+
+	// Update the whole cart of items div
+	function updateResults() {
+		outputItems.replaceChildren();
+		for (const product of productCart) {
+			outputItems.appendChild(product.card);
+		}
+	}
+
+	// Remove individual products from the cart
+	function removeProduct() {
+		let indexFound = productCart.findIndex((product, index) => product.id === event.originalTarget.parentElement.id);
+
+		if (indexFound != -1) {
+			totalCost -= productCart[indexFound].price;
+			outputItems.removeChild(productCart[indexFound].card);
+			productCart.splice(indexFound, 1);
+
+			outputTotals.textContent = totalCost;
+		}
+	}
+
+	class product {
+		constructor(name, price) {
+			const card = document.createElement("div");
+			let id = "product-";
+
+			if (productCart.length != 0) {
+				const indexOf = productCart[productCart.length - 1].id.indexOf("-") + 1;
+				id += parseInt(productCart[productCart.length - 1].id.slice(indexOf)) + 1;
+			} else {
+				id += "1";
+			}
+
+			card.setAttribute("id", id);
+			card.setAttribute("class", "card");
+
+			let htmlString = `<button class="remove" onclick="removeProduct();">X</button><p>🥘 ${name}</p><p>€ ${price}</p>`;
+			card.innerHTML = htmlString;
+
+			this.id = id;
+			this.name = name;
+			this.price = parseInt(price);
+			this.card = card;
+		}
+	}
+</script>
