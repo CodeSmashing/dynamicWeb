@@ -1,0 +1,101 @@
+<!--
+E2: Recept Generator
+
+Maak een systeem dat receptkaarten genereert met template literals.
+
+HTML om mee te starten:
+
+<div id="recipeCard">
+    <input type="text" id="recipeName" placeholder="Naam van het recept">
+    <input type="number" id="prepTime" placeholder="Bereidingstijd (minuten)">
+    <textarea id="ingredients" placeholder="Ingrediënten (1 per regel)"></textarea>
+    <button id="generateCard">Genereer Recept Kaart</button>
+    
+    <div id="result"></div>
+</div>
+
+Vereisten:
+• Gebruik template literals voor het genereren van de receptkaart
+• Converteer de ingrediënten textarea naar een array (split op nieuwe regel)
+• Toon alle ingrediënten in een mooie lijst
+• De gegenereerde kaart moet er ongeveer zo uitzien:
+	🥘 Pasta Carbonara
+	⏱️ Bereidingstijd: 20 minuten
+
+	Ingrediënten:
+	- Pasta
+	- Spek
+	- Ei
+	- Parmezaan
+-->
+
+<style>
+	.card {
+		background-color: gray;
+		margin: 10px;
+		padding: 20px;
+	}
+</style>
+
+<div id="recipeCard">
+    <input type="text" id="recipeName" placeholder="Naam van het recept">
+    <input type="number" id="prepTime" placeholder="Bereidingstijd (minuten)">
+    <textarea id="ingredients" placeholder="Ingrediënten (splits met komma's)"></textarea>
+    <button id="generateCard">Genereer Recept Kaart</button>
+    
+    <div id="result"></div>
+</div>
+
+<script>
+	const inputName = document.querySelector("#recipeName");
+	const inputPrepTime = document.querySelector("#prepTime");
+	const inputIngredients = document.querySelector("#ingredients");
+	const inputButton = document.querySelector("#generateCard");
+	const outputResult = document.querySelector("#result");
+	const recipeArray = [];
+
+	inputButton.addEventListener("click", () => {
+		if (inputName.value !== "" && inputPrepTime.value !== "" && inputIngredients.value) {
+			const newRecipe = new recipe(inputName.value, inputPrepTime.value, inputIngredients.value);
+			recipeArray.push(newRecipe);
+			outputResult.appendChild(newRecipe.card)
+		} else {
+			alert("One ore more of the inputs were left empty.");
+		}
+	});
+
+	class recipe {
+		constructor(name, prepTime, ingredients) {
+			const card = document.createElement("div");
+			let id = "recipte-";
+			ingredients = ingredients.trim().replace(/(\r\n|\n|\r)/gm, "").replaceAll(" ", "").split(",");
+
+			if (recipeArray.length != 0) {
+				const indexOf = recipeArray[recipeArray.length - 1].id.indexOf("-") + 1;
+				id += parseInt(recipeArray[recipeArray.length - 1].id.slice(indexOf)) + 1;
+			} else {
+				id += "1";
+			}
+
+			card.setAttribute("id", id);
+			card.setAttribute("class", "card");
+
+			let htmlString = `<p>🥘 ${name}</p>
+			<p>⏱️ Bereidingstijd: ${prepTime} minuten</p></br>
+
+			<p>Ingrediënten:</p>
+			`;
+
+			for (const ingredient of ingredients) {
+				htmlString += `<p>- ${ingredient}</p>`;
+			}
+			card.innerHTML = htmlString;
+
+			this.id = id;
+			this.name = name;
+			this.prepTime = prepTime;
+			this.ingredients = ingredients;
+			this.card = card;
+		}
+	}
+</script>
