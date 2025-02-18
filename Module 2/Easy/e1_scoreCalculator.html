@@ -1,0 +1,81 @@
+<!-- 
+E1: Score Calculator
+
+Maak een programma dat studentenscores bijhoudt voor een vak. Je start met onderstaande HTML.
+
+HTML om mee te starten:
+
+<div id="scoreCalculator">
+    <input type="number" id="score" placeholder="Voer score in (0-20)">
+    <button id="addScore">Voeg Score Toe</button>
+    
+    <div id="stats">
+        <p>Gemiddelde score: <span id="average">0</span></p>
+        <p>Hoogste score: <span id="highest">0</span></p>
+    </div>
+    
+    <ul id="scoreList"></ul>
+</div>
+
+Vereisten:
+• Gebruik let voor je scores array
+• Gebruik de array methods push voor nieuwe scores
+• Update de statistieken elke keer als er een score wordt toegevoegd
+• Toon alle scores in de ul lijst
+-->
+
+<div id="scoreCalculator">
+    <input type="number" id="score" placeholder="Voer score in (0-20)" min="0" max="20">
+    <button id="addScore">Voeg Score Toe</button>
+    
+    <div id="stats">
+        <p>Gemiddelde score: <span id="average">0</span></p>
+        <p>Hoogste score: <span id="highest">0</span></p>
+    </div>
+    
+    <ul id="scoreList"></ul>
+</div>
+
+<script>
+	"use strict";
+	const scores = [];
+	const outputTotal = document.querySelector("#scoreList");
+	const outputAverage = document.querySelector("#average");
+	const outputHighest = document.querySelector("#highest");
+	const inputNumber = document.querySelector("#score");
+	const inputButton = document.querySelector("#addScore");
+
+	inputButton.addEventListener("click", () => {
+		try {
+			const inputScore = Number.parseInt(inputNumber.value);
+
+			if (isNaN(inputScore)) {
+				inputNumber.value = "";
+				console.log("The inputted value wasn't recognized as a number, try again!");
+			} else {
+				const li = document.createElement("li");
+				const p = document.createElement("p");
+				let totalScores = 0;
+				scores.push(inputScore);
+
+				// 1. Calculate the total amount
+				for (const score of scores) {
+					totalScores += score;
+				}
+
+				// 2. Output a new list item
+				p.textContent = inputScore;
+				li.appendChild(p);
+				outputTotal.appendChild(li);
+
+				// 3. Output the average
+				outputAverage.textContent = Math.round((totalScores / scores.length) * 100) / 100;
+
+				// 4. Output the highest
+				outputHighest.textContent = scores.reduce((previous = 0, current) => current > previous ? current : previous);
+			}
+		} catch (error) {
+			console.log("Something unexpected occured: " + error);
+		}
+	});
+</script>
