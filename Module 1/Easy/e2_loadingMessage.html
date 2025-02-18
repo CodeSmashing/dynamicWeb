@@ -1,0 +1,34 @@
+<!--
+E2: Loading Message
+
+Schrijf code die:
+• Een div toont met "Loading..." wanneer de pagina begint te laden
+• Deze tekst verandert in "Welcome!" wanneer alles geladen is
+• Na nog eens 2 seconden de tekst verbergt
+
+<div id="loadingMessage">Loading...</div>
+
+<!- Voeg wat afbeeldingen toe om de laadtijd te verlengen ->
+<img src="https://picsum.photos/800/600">
+<img src="https://picsum.photos/800/601">
+<img src="https://picsum.photos/800/602">
+-->
+
+<div id="loadingMessage">Loading...</div>
+
+<!-- Voeg wat afbeeldingen toe om de laadtijd te verlengen -->
+<img src="https://picsum.photos/800/600">
+<img src="https://picsum.photos/800/601">
+<img src="https://picsum.photos/800/602">
+
+<script>
+	window.addEventListener("load", () => {
+		const loadMessage = document.querySelector("#loadingMessage");
+
+		loadMessage.textContent = "Welcome!";
+
+		setTimeout(() => {
+			document.body.removeChild(loadMessage);
+		}, 2000);
+	});
+</script>
