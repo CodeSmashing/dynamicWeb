@@ -1,0 +1,171 @@
+<!--
+M2: Overzicht studenten resultaten
+
+Maak een dashboard waar je studentenresultaten kunt bekijken en toevoegen.
+HTML om mee te starten:
+
+<div id="studentDashboard">
+    <div id="addGrade">
+        <select id="student">
+            <option value="Alex">Alex</option>
+            <option value="Sam">Sam</option>
+            <option value="Jo">Jo</option>
+        </select>
+        <input type="text" id="course" placeholder="Vaknaam">
+        <input type="number" id="grade" placeholder="Score (0-20)">
+        <button id="addGrade">Voeg Score Toe</button>
+    </div>
+
+    <div id="studentOverview"></div>
+</div>
+
+Vereisten:
+• Gebruik objecten voor het opslaan van student data
+• Gebruik for...of loops voor het tonen van resultaten
+• Genereer een overzicht met template literals
+• Toon per student:
+	• Alle vakken met scores
+	• Gemiddelde score
+	• Hoogste en laagste score
+-->
+<style>
+	.card {
+		background-color: gray;
+		margin: 10px;
+		padding: 20px;
+	}
+
+    .bold {
+        position: relative;
+        z-index: 1;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            background-color: rgb(110, 104, 104);
+            z-index: -1;
+        }
+    }
+
+    .soft {
+        position: relative;
+        z-index: 1;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            background-color: rgb(174, 163, 163);
+            z-index: -1;
+        }
+    }
+</style>
+
+<div id="studentDashboard">
+    <div id="addGrade">
+        <select id="student">
+            <option value="Alex">Alex</option>
+            <option value="Sam">Sam</option>
+            <option value="Jo">Jo</option>
+            <option value="Bob">Bob</option>
+        </select>
+        <input type="text" id="course" placeholder="Vaknaam">
+        <input type="number" id="grade" placeholder="Score (0-20)">
+        <button id="addGrade">Voeg Score Toe</button>
+    </div>
+
+    <div id="studentOverview"></div>
+</div>
+
+<script>
+    "use strict";
+
+    const selectStudent = document.querySelector("#student");
+    const inputCourse = document.querySelector("#course");
+    const inputGrade = document.querySelector("#grade");
+    const inputButton = document.querySelector("button#addGrade");
+    const outputOverview = document.querySelector("#studentOverview");
+    const studentsArray = [];
+
+    inputButton.addEventListener("click", () => {
+        const studentName = selectStudent.options[selectStudent.options.selectedIndex].value;
+        const studentCourse = inputCourse.value.trim();
+        const studentGrade = Number(inputGrade.value.trim());
+
+        if (studentCourse === "" && studentGrade === "") return alert("One or more of the inputs were left empty.");
+        if (isNaN(studentGrade)) return alert("Your inputted grade isn't recognized as a number.");
+
+        const studentObj = studentsArray.find(s => s.name === studentName);
+
+        // Create new student instance if one isn't found, adjust otherwise
+        if (studentObj === undefined) {
+            studentsArray.push(new student(studentName, {[studentCourse]: studentGrade}));
+        } else {
+            studentObj.adjustGrade(studentCourse, studentGrade);
+        }
+
+        updateOverview();
+    });
+
+    class student {
+        constructor(name, grades = {}) {
+			const card = document.createElement("div");
+			let idString = "student-";
+			let htmlString = `<p>${name}</p>`;
+
+			if (studentsArray.length != 0) {
+				const indexOf = studentsArray[studentsArray.length - 1].id.indexOf("-");
+				idString += parseInt(studentsArray[studentsArray.length - 1].id.slice(indexOf + 1)) + 1;
+			} else {
+				idString += "1";
+			}
+
+            for (const [course, grade] of Object.entries(grades)) {
+                htmlString += `<p>${course}: ${grade}</p>`;
+            }
+
+			card.setAttribute("id", idString);
+			card.setAttribute("class", "card");
+			card.innerHTML = htmlString;
+
+            this.id = idString;
+            this.name = name;
+            this.grades = grades;
+            this.card = card;
+        }
+
+        adjustGrade(course, grade) {
+            this.grades[course] = grade;
+            this.adjustCard();
+        }
+
+        adjustCard() {
+			let htmlString = `<p>${this.name}</p>`;
+
+            const highestGradeCourse = Object.entries(this.grades).reduce((previous, current) => previous[1] > current[1] ? previous : current);
+            const lowestGradeCourse = Object.entries(this.grades).reduce((previous, current) => previous[1] < current[1] ? previous : current);
+            for (const [course, grade] of Object.entries(this.grades)) {
+                htmlString += `<p ${
+                    highestGradeCourse[0] === course ?
+                    "class='bold'" : lowestGradeCourse[0] === course ?
+                    "class='soft'" : ""
+                }>${course}: ${grade}</p>`;
+            }
+            this.card.innerHTML = htmlString;
+        }
+    }
+
+    function updateOverview() {
+        outputOverview.replaceChildren();
+        for (const studentObj of studentsArray) {
+            outputOverview.appendChild(studentObj.card);
+        }
+    }
+</script>
