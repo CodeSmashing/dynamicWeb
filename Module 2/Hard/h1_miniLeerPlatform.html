@@ -1,0 +1,391 @@
+<!--
+H1: Mini Leerplatform
+
+Bouw een mini leerplatform waar studenten kunnen inschrijven voor cursussen en scores kunnen krijgen.
+HTML om mee te starten:
+
+<div id="learningPlatform">
+    <div id="courses">
+        <h3>Cursussen Beheren</h3>
+        <input type="text" id="courseTitle" placeholder="Cursus titel">
+        <input type="text" id="courseDesc" placeholder="Beschrijving">
+        <button id="addCourse">Voeg Cursus Toe</button>
+        <div id="courseList"></div>
+    </div>
+
+    <div id="students">
+        <h3>Studenten Beheren</h3>
+        <input type="text" id="studentName" placeholder="Student naam">
+        <select id="coursePicker"></select>
+        <button id="enrollStudent">Schrijf Student In</button>
+        <div id="studentList"></div>
+    </div>
+
+    <div id="grades">
+        <h3>Scores Toekennen</h3>
+        <select id="studentPicker"></select>
+        <select id="modulePicker"></select>
+        <input type="number" id="moduleGrade" placeholder="Score">
+        <button id="addGrade">Ken Score Toe</button>
+    </div>
+
+    <div id="reports">
+        <h3>Rapporten</h3>
+        <select id="reportStudent"></select>
+        <button id="generateReport">Genereer Rapport</button>
+        <div id="reportOutput"></div>
+    </div>
+</div>
+
+Vereisten:
+• Gebruik constanten voor data die niet mag veranderen
+• Gebruik arrays en objecten voor het structureren van:
+    • Cursussen (titel, beschrijving, modules)
+    • Studenten (naam, ingeschreven cursussen, scores)
+    • Scores (per module)
+• Gebruik de correcte array methods voor:
+    • Toevoegen/verwijderen van cursussen
+    • Inschrijven van studenten
+    • Toekennen van scores
+• Gebruik template literals voor het genereren van:
+    • Cursusoverzichten
+    • Studentenlijsten
+    • Rapporten
+• Update alle relevante dropdown menu's wanneer data verandert
+-->
+<style>
+	.card {
+		background-color: gray;
+		margin: 10px 5px;
+		padding: 20px;
+		border-radius: 8px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		max-width: 300px;
+		font-family: Arial, sans-serif;
+	}
+
+	.card h2 {
+		color: #333;
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+
+	.card .description {
+		font-size: 16px;
+		margin-bottom: 15px;
+	}
+
+	.card .module {
+		background-color: #e9ecef82;
+		border-radius: 4px;
+		color: #3b3e42;
+		font-size: 14px;
+		margin-bottom: 8px;
+		padding: 8px 12px;
+	}
+</style>
+
+<div id="learningPlatform">
+    <div id="courses">
+        <h3>Cursussen Beheren</h3>
+        <input type="text" id="courseTitle" placeholder="Cursus titel">
+        <input type="text" id="courseDesc" placeholder="Beschrijving">
+        <button id="addCourse">Voeg Cursus Toe</button>
+        <div id="courseList"></div>
+    </div>
+
+    <div id="students">
+        <h3>Studenten Beheren</h3>
+        <input type="text" id="studentName" placeholder="Student naam">
+        <select id="coursePicker"></select>
+        <button id="enrollStudent">Schrijf Student In</button>
+        <div id="studentList"></div>
+    </div>
+
+    <div id="grades">
+        <h3>Scores Toekennen</h3>
+        <select id="studentPicker"></select>
+        <select id="modulePicker"></select>
+        <input type="number" id="moduleGrade" placeholder="Score">
+        <button id="addGrade">Ken Score Toe</button>
+    </div>
+
+    <div id="reports">
+        <h3>Rapporten</h3>
+        <select id="reportStudent"></select>
+        <button id="generateReport">Genereer Rapport</button>
+        <div id="reportOutput"></div>
+    </div>
+</div>
+
+<script>
+	"use strict";
+
+	const containerPlatform = document.querySelector("#learningPlatform");
+	const inputFields = {
+		"courses": containerPlatform.querySelector("#courses"),
+		"students": containerPlatform.querySelector("#students"),
+		"grades": containerPlatform.querySelector("#grades"),
+		"reports": containerPlatform.querySelector("#reports")
+	}
+	const selectMenus = Array.from(containerPlatform.querySelectorAll("select"));
+	const courseModules = [
+		"Introduction to Data Structures",
+		"Advanced Machine Learning Techniques",
+		"Web Design Fundamentals",
+		"Organic Chemistry Lab",
+		"World History: Ancient Civilizations",
+		"Digital Marketing Strategies",
+		"Calculus II: Integration Techniques",
+		"Creative Writing Workshop",
+		"Principles of Microeconomics",
+		"Mobile App Development with React Native",
+		"Environmental Science and Sustainability",
+		"Introduction to Psychology",
+		"Artificial Intelligence Ethics",
+		"Spanish Language and Culture",
+		"Graphic Design for Beginners",
+		"Quantum Physics: Theory and Applications",
+		"Business Law and Ethics",
+		"Digital Photography Techniques",
+		"Human Anatomy and Physiology",
+		"Cybersecurity Fundamentals"
+	];
+	
+	const coursesArray = [];
+	const studentsArray = [];
+	
+	for (const [key, fieldElement] of Object.entries(inputFields)) {
+		fieldElement.querySelector("button").addEventListener("click", () => {
+			let outputList;
+			let studentObj;
+			let course;
+			let selectStudent;
+			let inputStudent;
+
+			switch (key) {
+				case "courses":
+					const inputTitle = fieldElement.querySelector("#courseTitle").value.trim();
+					const inputDescription = fieldElement.querySelector("#courseDesc").value.trim();
+					outputList = fieldElement.querySelector("#courseList");
+
+					if (inputTitle === "" || inputDescription === "") return alert("One or more of the inputs were left empty.");
+
+					const courseObj = coursesArray.find(c => c.title === inputTitle);
+
+					// Create new course instance if one isn't found, adjust otherwise
+					if (courseObj === undefined) {
+						coursesArray.push(new Course(inputTitle, inputDescription));
+						updateSelectOptions("coursePicker", coursesArray);
+					} else {
+						courseObj.adjustDescription(inputDescription);
+					}
+					
+					updateOutputList(outputList, coursesArray);
+					break;
+				case "students":
+					const selectCourse = fieldElement.querySelector("#coursePicker");
+					const inputCourse = selectCourse.options[selectCourse.options.selectedIndex].value;
+					const inputName = fieldElement.querySelector("#studentName").value.trim();
+					outputList = fieldElement.querySelector("#studentList");
+
+					if (inputName === "") return alert("The name input was left empty.");
+					studentObj = studentsArray.find(s => s.name === inputName);
+					course = coursesArray.find(c => c.title === inputCourse);
+
+					// Create new student instance if one isn't found, adjust otherwise
+					if (studentObj === undefined) {
+						const newStudent = new Student(inputName, course);
+						studentsArray.push(newStudent);
+						course.addStudent(newStudent);
+						
+						updateSelectOptions("studentPicker", studentsArray);
+						updateSelectOptions("modulePicker", course.modules);
+						updateSelectOptions("reportStudent", studentsArray);
+					} else {
+						studentObj.adjustCourse(course);
+
+						updateSelectOptions("modulePicker", course.modules);
+					}
+					break;
+				case "grades":
+					selectStudent = fieldElement.querySelector("#studentPicker");
+					const selectModule = fieldElement.querySelector("#modulePicker");
+					inputStudent = selectStudent.options[selectStudent.options.selectedIndex].value;
+					const inputModule = selectModule.options[selectModule.options.selectedIndex].value;
+					const inputGrade = Number(fieldElement.querySelector("#moduleGrade").value.trim());
+
+        			if (isNaN(inputGrade)) return alert("Your inputted grade isn't recognized as a number.");
+					studentObj = studentsArray.find(s => s.name === inputStudent);
+
+					studentObj.scores[studentObj.course.title][inputModule] = inputGrade;
+					studentObj.adjustCard();
+					break;
+				case "reports":
+					selectStudent = fieldElement.querySelector("#reportStudent");
+					inputStudent = selectStudent.options[selectStudent.options.selectedIndex].value;
+					outputList = fieldElement.querySelector("#reportOutput");
+					studentObj = studentsArray.find(s => s.name === inputStudent);
+
+					outputList.replaceChildren();
+					outputList.appendChild(studentObj.card);
+					break;
+				default:
+					console.log("Unexpected case.");
+					break;
+			}
+		});
+	}
+
+	function updateOutputList(outputList, outputArray) {
+        outputList.replaceChildren();
+		for (const item of outputArray) {
+            outputList.appendChild(item.card);
+		}
+	}
+
+	// Will likely have to declare every dropdown in order to adjust
+	function updateSelectOptions(targetId, outputArray) {
+		const selectMenu = selectMenus.find(element => element.id === targetId);
+        selectMenu.replaceChildren();
+
+		for (const option of outputArray) {
+			const newOption = document.createElement("option");
+			switch (targetId) {
+				case "coursePicker":
+					newOption.value = option.title;
+					newOption.textContent = option.title;
+					break;
+				case "studentPicker":
+					newOption.value = option.name;
+					newOption.textContent = option.name;
+					break;
+				case "modulePicker":
+					newOption.value = option;
+					newOption.textContent = option;
+					break;
+				case "reportStudent":
+					newOption.value = option.name;
+					newOption.textContent = option.name;
+					break;
+				default:
+					break;
+			}
+			selectMenu.appendChild(newOption);
+		}
+		// console.log(selectMenu);
+	}
+
+	function getRandomInt(min = 0, max = 20) {
+		return Math.round(Math.random() * (max - min)) + min;
+	}
+
+	class Course {
+		constructor(title, description) {
+			const card = document.createElement("div");
+			let idString = "course-";
+			let htmlString = `<h2>${title}</h2><p class="description">${description}</p>`;
+			let modules = [];
+
+			if (coursesArray.length != 0) {
+				const indexOf = coursesArray[coursesArray.length - 1].id.indexOf("-");
+				idString += parseInt(coursesArray[coursesArray.length - 1].id.slice(indexOf + 1)) + 1;
+			} else {
+				idString += "1";
+			}
+
+			for (let i = 0; i < 5; i++) {
+				modules.push(courseModules[getRandomInt(0, courseModules.length - 1)]);
+				htmlString += `<p class="module">${modules[i]}</p>`;
+			}
+
+			card.setAttribute("id", idString);
+			card.setAttribute("class", "card");
+			card.innerHTML = htmlString;
+
+            this.id = idString;
+			this.title = title;
+			this.description = description;
+			this.modules = modules;
+			this.students = [];
+			this.card = card;
+		}
+
+        adjustDescription(description) {
+            this.description = description;
+            this.adjustCard();
+        }
+
+		addStudent(student) {
+			this.students.push(student);
+		}
+
+        adjustCard() {
+			let htmlString = `<h2>${this.title}</h2><p class="description">${this.description}</p>`;
+
+			for (let i = 0; i < this.modules.length; i++) {
+				htmlString += `<p class="module">${this.modules[i]}</p>`;
+			}
+
+            this.card.innerHTML = htmlString;
+        }
+	}
+
+	class Student {
+		constructor(name, course, scores = {}) {
+			const card = document.createElement("div");
+			let idString = "student-";
+			let htmlString = `<h3>${name}</h3>`;
+
+			if (studentsArray.length != 0) {
+				const indexOf = studentsArray[studentsArray.length - 1].id.indexOf("-");
+				idString += parseInt(studentsArray[studentsArray.length - 1].id.slice(indexOf + 1)) + 1;
+			} else {
+				idString += "1";
+			}
+
+			htmlString += `<p>${course.title}</p>`;
+			
+			for (const module of course.modules) {
+				htmlString += `<p>${module}: N/A</p>`;
+			}
+			
+			card.setAttribute("id", idString);
+			card.setAttribute("class", "card");
+			card.innerHTML = htmlString;
+
+            this.id = idString;
+			this.name = name;
+			this.course = course;
+			this.scores = {[course.title]: {}};
+			for (const module of course.modules) {
+				this.scores[course.title][module] = null;
+			}
+			this.card = card;
+		}
+
+		adjustCourse(course) {
+			this.course = course;
+
+			if (!Object.keys(this.scores).includes(course.title)) {
+				this.scores[course.title] = {};
+				for (const module of course.modules) {
+					this.scores[course.title][module] = null;
+				}
+			}
+		}
+
+        adjustCard() {
+			let htmlString = `<h3>${this.name}</h3>`;
+
+			for (const [title, modules] of Object.entries(this.scores)) {
+				htmlString += `<h4>${title}</h4>`;
+				for (const [module, score] of Object.entries(modules)) {
+					htmlString += `<p class="module">${module}: ${score === null ? "N/A" : score}</p>`;
+				}
+			}
+
+            this.card.innerHTML = htmlString;
+        }
+	}
+</script>
