@@ -122,12 +122,12 @@ Vereisten:
 	"use strict";
 
 	const containerPlatform = document.querySelector("#learningPlatform");
-	const inputFieldList = {
-		"courses": containerPlatform.querySelector("#courses"),
-		"students": containerPlatform.querySelector("#students"),
-		"grades": containerPlatform.querySelector("#grades"),
-		"reports": containerPlatform.querySelector("#reports")
-	}
+	const inputFieldList = [
+		containerPlatform.querySelector("#courses"),
+		containerPlatform.querySelector("#students"),
+		containerPlatform.querySelector("#grades"),
+		containerPlatform.querySelector("#reports")
+	];
 	const selectList = Array.from(containerPlatform.querySelectorAll("select"));
 	const courseTitleList = [
 		"Introduction to Data Structures",
@@ -155,11 +155,17 @@ Vereisten:
 	const courseList = [];
 	const studentList = [];
 
-	for (const [key, inputField] of Object.entries(inputFieldList)) {
-		inputField.querySelector("button").addEventListener("click", () => handleInput(key, inputField));
+	for (const inputField of inputFieldList) {
+		inputField.querySelector("button").addEventListener("click", () => handleInput(inputField));
 	}
 
-	function handleInput(key, inputField) {
+	const studentPicker = document.querySelector("#studentPicker");
+	studentPicker.addEventListener("change", () => {
+		const selectStudent = studentList.find(s => s.name === event.target.options[event.target.options.selectedIndex].value);
+		updateSelectOptions("modulePicker", [selectStudent.course]);
+	});
+
+	function handleInput(inputField) {
 		const elementList = Array.from(inputField.querySelectorAll("&>:not(h3, button)"));
 		const keywordList = {
 			"input": ["courseTitle", "courseDesc", "studentName", "moduleGrade"],
@@ -189,8 +195,8 @@ Vereisten:
 
 		let course;
 		let student;
-
-		switch (key) {
+		
+		switch (inputField.id) {
 			case "courses":
 				course = courseList.find(c => c.title === inputList.courseTitle);
 
@@ -199,7 +205,6 @@ Vereisten:
 					courseList.push(new Course(inputList.courseTitle, inputList.courseDesc));
 
 					updateSelectOptions("coursePicker", courseList);
-					updateSelectOptions("modulePicker", courseList);
 				} else {
 					course.description = inputList.courseDesc;
 					course.updateCard();
@@ -216,12 +221,12 @@ Vereisten:
 					studentList.push(new Student(inputList.studentName, course));
 
 					updateSelectOptions("studentPicker", studentList);
-					updateSelectOptions("modulePicker", courseList);
 					updateSelectOptions("reportStudent", studentList);
 				} else {
 					student.updateCourse(course);
-					updateSelectOptions("modulePicker", courseList);
 				}
+
+				updateOutputList(inputList.studentList, studentList);
 				break;
 			case "grades":
 				student = studentList.find(s => s.name === inputList.studentPicker);
@@ -281,6 +286,10 @@ Vereisten:
 			}
 			select.appendChild(option);
 		}
+
+		// Manually trigger a "change" event
+		const event = new Event('change');
+		select.dispatchEvent(event);
 	}
 
 	function getRandomInt(min = 0, max = 20) {
@@ -328,8 +337,8 @@ Vereisten:
 			const indexOf = lastStudent === undefined ? undefined : lastStudent.id.indexOf("-");
 			const idString = lastStudent === undefined ? "student-1" : "student-" + (parseInt(lastStudent.id.slice(indexOf + 1)) + 1);
 
-			let htmlString = `<h3>${name}</h3><p>${course.title}</p>`;
-			htmlString += course.moduleList.map(module => `<p>${module}: N/A</p>`).join('');
+			let htmlString = `<h2>${name}</h2><p class="description">${course.title}</p>`;
+			htmlString += course.moduleList.map(module => `<p class="module">${module}: N/A</p>`).join('');
 
 			card.setAttribute("id", idString);
 			card.setAttribute("class", "card");
@@ -358,10 +367,10 @@ Vereisten:
 		}
 
 		updateCard() {
-			let htmlString = `<h3>${this.name}</h3>`;
+			let htmlString = `<h2>${this.name}</h2>`;
 			htmlString += Object.entries(this.scores)
 				.map(([title, moduleList]) => `
-					<h4>${title}</h4>
+					<p class="description">${title}</p>
 					${Object.entries(moduleList)
 						.map(([module, score]) => `
 							<p class="module">${module}: ${score === null ? "N/A" : score}</p>
