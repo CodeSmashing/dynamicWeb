@@ -86,50 +86,50 @@ Vereisten:
 </style>
 
 <div id="learningPlatform">
-    <div id="courses">
-        <h3>Cursussen Beheren</h3>
-        <input type="text" id="courseTitle" placeholder="Cursus titel">
-        <input type="text" id="courseDesc" placeholder="Beschrijving">
-        <button id="addCourse">Voeg Cursus Toe</button>
-        <div id="courseList"></div>
-    </div>
+	<div id="courses">
+		<h3>Cursussen Beheren</h3>
+		<input type="text" id="courseTitle" placeholder="Cursus titel">
+		<input type="text" id="courseDesc" placeholder="Beschrijving">
+		<button id="addCourse">Voeg Cursus Toe</button>
+		<div id="courseList"></div>
+	</div>
 
-    <div id="students">
-        <h3>Studenten Beheren</h3>
-        <input type="text" id="studentName" placeholder="Student naam">
-        <select id="coursePicker"></select>
-        <button id="enrollStudent">Schrijf Student In</button>
-        <div id="studentList"></div>
-    </div>
+	<div id="students">
+		<h3>Studenten Beheren</h3>
+		<input type="text" id="studentName" placeholder="Student naam">
+		<select id="coursePicker"></select>
+		<button id="enrollStudent">Schrijf Student In</button>
+		<div id="studentList"></div>
+	</div>
 
-    <div id="grades">
-        <h3>Scores Toekennen</h3>
-        <select id="studentPicker"></select>
-        <select id="modulePicker"></select>
-        <input type="number" id="moduleGrade" placeholder="Score">
-        <button id="addGrade">Ken Score Toe</button>
-    </div>
+	<div id="grades">
+		<h3>Scores Toekennen</h3>
+		<select id="studentPicker"></select>
+		<select id="modulePicker"></select>
+		<input type="number" id="moduleGrade" placeholder="Score" min="0" max="100">
+		<button id="addGrade">Ken Score Toe</button>
+	</div>
 
-    <div id="reports">
-        <h3>Rapporten</h3>
-        <select id="reportStudent"></select>
-        <button id="generateReport">Genereer Rapport</button>
-        <div id="reportOutput"></div>
-    </div>
+	<div id="reports">
+		<h3>Rapporten</h3>
+		<select id="reportStudent"></select>
+		<button id="generateReport">Genereer Rapport</button>
+		<div id="reportOutput"></div>
+	</div>
 </div>
 
 <script>
 	"use strict";
 
 	const containerPlatform = document.querySelector("#learningPlatform");
-	const inputFields = {
+	const inputFieldList = {
 		"courses": containerPlatform.querySelector("#courses"),
 		"students": containerPlatform.querySelector("#students"),
 		"grades": containerPlatform.querySelector("#grades"),
 		"reports": containerPlatform.querySelector("#reports")
 	}
-	const selectMenus = Array.from(containerPlatform.querySelectorAll("select"));
-	const courseModules = [
+	const selectList = Array.from(containerPlatform.querySelectorAll("select"));
+	const courseTitleList = [
 		"Introduction to Data Structures",
 		"Advanced Machine Learning Techniques",
 		"Web Design Fundamentals",
@@ -151,129 +151,136 @@ Vereisten:
 		"Human Anatomy and Physiology",
 		"Cybersecurity Fundamentals"
 	];
-	
-	const coursesArray = [];
-	const studentsArray = [];
-	
-	for (const [key, fieldElement] of Object.entries(inputFields)) {
-		fieldElement.querySelector("button").addEventListener("click", () => {
-			let outputList;
-			let studentObj;
-			let course;
-			let selectStudent;
-			let inputStudent;
 
-			switch (key) {
-				case "courses":
-					const inputTitle = fieldElement.querySelector("#courseTitle").value.trim();
-					const inputDescription = fieldElement.querySelector("#courseDesc").value.trim();
-					outputList = fieldElement.querySelector("#courseList");
+	const courseList = [];
+	const studentList = [];
 
-					if (inputTitle === "" || inputDescription === "") return alert("One or more of the inputs were left empty.");
-
-					const courseObj = coursesArray.find(c => c.title === inputTitle);
-
-					// Create new course instance if one isn't found, adjust otherwise
-					if (courseObj === undefined) {
-						coursesArray.push(new Course(inputTitle, inputDescription));
-						updateSelectOptions("coursePicker", coursesArray);
-					} else {
-						courseObj.adjustDescription(inputDescription);
-					}
-					
-					updateOutputList(outputList, coursesArray);
-					break;
-				case "students":
-					const selectCourse = fieldElement.querySelector("#coursePicker");
-					const inputCourse = selectCourse.options[selectCourse.options.selectedIndex].value;
-					const inputName = fieldElement.querySelector("#studentName").value.trim();
-					outputList = fieldElement.querySelector("#studentList");
-
-					if (inputName === "") return alert("The name input was left empty.");
-					studentObj = studentsArray.find(s => s.name === inputName);
-					course = coursesArray.find(c => c.title === inputCourse);
-
-					// Create new student instance if one isn't found, adjust otherwise
-					if (studentObj === undefined) {
-						const newStudent = new Student(inputName, course);
-						studentsArray.push(newStudent);
-						course.addStudent(newStudent);
-						
-						updateSelectOptions("studentPicker", studentsArray);
-						updateSelectOptions("modulePicker", course.modules);
-						updateSelectOptions("reportStudent", studentsArray);
-					} else {
-						studentObj.adjustCourse(course);
-
-						updateSelectOptions("modulePicker", course.modules);
-					}
-					break;
-				case "grades":
-					selectStudent = fieldElement.querySelector("#studentPicker");
-					const selectModule = fieldElement.querySelector("#modulePicker");
-					inputStudent = selectStudent.options[selectStudent.options.selectedIndex].value;
-					const inputModule = selectModule.options[selectModule.options.selectedIndex].value;
-					const inputGrade = Number(fieldElement.querySelector("#moduleGrade").value.trim());
-
-        			if (isNaN(inputGrade)) return alert("Your inputted grade isn't recognized as a number.");
-					studentObj = studentsArray.find(s => s.name === inputStudent);
-
-					studentObj.scores[studentObj.course.title][inputModule] = inputGrade;
-					studentObj.adjustCard();
-					break;
-				case "reports":
-					selectStudent = fieldElement.querySelector("#reportStudent");
-					inputStudent = selectStudent.options[selectStudent.options.selectedIndex].value;
-					outputList = fieldElement.querySelector("#reportOutput");
-					studentObj = studentsArray.find(s => s.name === inputStudent);
-
-					outputList.replaceChildren();
-					outputList.appendChild(studentObj.card);
-					break;
-				default:
-					console.log("Unexpected case.");
-					break;
-			}
-		});
+	for (const [key, inputField] of Object.entries(inputFieldList)) {
+		inputField.querySelector("button").addEventListener("click", () => handleInput(key, inputField));
 	}
 
-	function updateOutputList(outputList, outputArray) {
-        outputList.replaceChildren();
-		for (const item of outputArray) {
-            outputList.appendChild(item.card);
+	function handleInput(key, inputField) {
+		const elementList = Array.from(inputField.querySelectorAll("&>:not(h3, button)"));
+		const keywordList = {
+			"input": ["courseTitle", "courseDesc", "studentName", "moduleGrade"],
+			"list": ["courseList", "studentList", "reportOutput"],
+			"select": ["coursePicker", "studentPicker", "modulePicker", "reportStudent"]
+		};
+		let inputList = {};
+
+		for (const element of elementList) {
+			keywordList.input.forEach(tag => {
+				if (element.id === tag) return inputList[tag] = element.value.trim();
+			});
+			keywordList.list.forEach(tag => {
+				if (element.id === tag) return inputList[tag] = element;
+			});
+			keywordList.select.forEach(tag => {
+				if (element.id === tag) {
+					return element.options.length != 0 ?
+						inputList[tag] = element.options[element.options.selectedIndex].value :
+						inputList[tag] = "";
+				}
+			});
+		}
+
+		if (inputList.length === 0 || Object.entries(inputList).some(([key, value]) => value === "")) return alert("One or more of the inputs were left empty.");
+		if (Object.keys(inputList).includes("moduleGrade") && isNaN(inputList["moduleGrade"])) return alert("Your inputted grade isn't recognized as a number.");
+
+		let course;
+		let student;
+
+		switch (key) {
+			case "courses":
+				course = courseList.find(c => c.title === inputList.courseTitle);
+
+				// Create new course instance if one isn't found, adjust otherwise
+				if (course === undefined) {
+					courseList.push(new Course(inputList.courseTitle, inputList.courseDesc));
+
+					updateSelectOptions("coursePicker", courseList);
+					updateSelectOptions("modulePicker", courseList);
+				} else {
+					course.description = inputList.courseDesc;
+					course.updateCard();
+				}
+
+				updateOutputList(inputList.courseList, courseList);
+				break;
+			case "students":
+				student = studentList.find(s => s.name === inputList.studentName);
+				course = courseList.find(c => c.title === inputList.coursePicker);
+
+				// Create new student instance if one isn't found, adjust otherwise
+				if (student === undefined) {
+					studentList.push(new Student(inputList.studentName, course));
+
+					updateSelectOptions("studentPicker", studentList);
+					updateSelectOptions("modulePicker", courseList);
+					updateSelectOptions("reportStudent", studentList);
+				} else {
+					student.updateCourse(course);
+					updateSelectOptions("modulePicker", courseList);
+				}
+				break;
+			case "grades":
+				student = studentList.find(s => s.name === inputList.studentPicker);
+
+				student.scores[student.course.title][inputList.modulePicker] = inputList.moduleGrade;
+				student.updateCard();
+				break;
+			case "reports":
+				student = studentList.find(s => s.name === inputList.reportStudent);
+
+				inputList.reportOutput.replaceChildren();
+				inputList.reportOutput.appendChild(student.card);
+				break;
+			default:
+				console.log("Unexpected case.");
+				break;
 		}
 	}
 
-	// Will likely have to declare every dropdown in order to adjust
-	function updateSelectOptions(targetId, outputArray) {
-		const selectMenu = selectMenus.find(element => element.id === targetId);
-        selectMenu.replaceChildren();
+	function updateOutputList(targetElement, outputList) {
+		targetElement.replaceChildren();
+		for (const item of outputList) {
+			targetElement.appendChild(item.card);
+		}
+	}
 
-		for (const option of outputArray) {
-			const newOption = document.createElement("option");
+	function updateSelectOptions(targetId, outputList) {
+		const select = selectList.find(element => element.id === targetId);
+		select.replaceChildren();
+
+		for (const item of outputList) {
+			let option = document.createElement("option");
 			switch (targetId) {
 				case "coursePicker":
-					newOption.value = option.title;
-					newOption.textContent = option.title;
+					option.value = item.title;
+					option.textContent = item.title;
 					break;
 				case "studentPicker":
-					newOption.value = option.name;
-					newOption.textContent = option.name;
+				case "reportStudent":
+					option.value = item.name;
+					option.textContent = item.name;
 					break;
 				case "modulePicker":
-					newOption.value = option;
-					newOption.textContent = option;
-					break;
-				case "reportStudent":
-					newOption.value = option.name;
-					newOption.textContent = option.name;
+					option = document.createElement("optgroup");
+					option.setAttribute("label", item.title);
+
+					for (const module of item.moduleList) {
+						const groupOption = document.createElement("option");
+						groupOption.value = module;
+						groupOption.textContent = module;
+						option.appendChild(groupOption);
+					}
 					break;
 				default:
+					console.log("We haven't considerd that id yet.");
 					break;
 			}
-			selectMenu.appendChild(newOption);
+			select.appendChild(option);
 		}
-		// console.log(selectMenu);
 	}
 
 	function getRandomInt(min = 0, max = 20) {
@@ -283,109 +290,86 @@ Vereisten:
 	class Course {
 		constructor(title, description) {
 			const card = document.createElement("div");
-			let idString = "course-";
-			let htmlString = `<h2>${title}</h2><p class="description">${description}</p>`;
-			let modules = [];
+			const lastCourse = courseList[Math.max(courseList.length - 1, 0)];
+			const indexOf = lastCourse === undefined ? undefined : lastCourse.id.indexOf("-");
+			const idString = lastCourse === undefined ? "course-1" : "course-" + (parseInt(lastCourse.id.slice(indexOf + 1)) + 1);
 
-			if (coursesArray.length != 0) {
-				const indexOf = coursesArray[coursesArray.length - 1].id.indexOf("-");
-				idString += parseInt(coursesArray[coursesArray.length - 1].id.slice(indexOf + 1)) + 1;
-			} else {
-				idString += "1";
-			}
+			let moduleList = [];
+			let htmlString = `<h2>${title}</h2><p class="description">${description}</p>`;
 
 			for (let i = 0; i < 5; i++) {
-				modules.push(courseModules[getRandomInt(0, courseModules.length - 1)]);
-				htmlString += `<p class="module">${modules[i]}</p>`;
+				moduleList.push(courseTitleList[getRandomInt(0, courseTitleList.length - 1)]);
+				htmlString += `<p class="module">${moduleList[i]}</p>`;
 			}
 
 			card.setAttribute("id", idString);
 			card.setAttribute("class", "card");
 			card.innerHTML = htmlString;
 
-            this.id = idString;
+			this.id = idString;
 			this.title = title;
 			this.description = description;
-			this.modules = modules;
-			this.students = [];
+			this.moduleList = moduleList;
+			this.studentList = [];
 			this.card = card;
 		}
 
-        adjustDescription(description) {
-            this.description = description;
-            this.adjustCard();
-        }
-
-		addStudent(student) {
-			this.students.push(student);
-		}
-
-        adjustCard() {
+		updateCard() {
 			let htmlString = `<h2>${this.title}</h2><p class="description">${this.description}</p>`;
-
-			for (let i = 0; i < this.modules.length; i++) {
-				htmlString += `<p class="module">${this.modules[i]}</p>`;
-			}
-
-            this.card.innerHTML = htmlString;
-        }
+			htmlString += this.moduleList.map(module => `<p class="module">${module}</p>`).join('');
+			this.card.innerHTML = htmlString;
+		}
 	}
 
 	class Student {
-		constructor(name, course, scores = {}) {
+		constructor(name, course) {
 			const card = document.createElement("div");
-			let idString = "student-";
-			let htmlString = `<h3>${name}</h3>`;
+			const lastStudent = studentList[Math.max(studentList.length - 1, 0)];
+			const indexOf = lastStudent === undefined ? undefined : lastStudent.id.indexOf("-");
+			const idString = lastStudent === undefined ? "student-1" : "student-" + (parseInt(lastStudent.id.slice(indexOf + 1)) + 1);
 
-			if (studentsArray.length != 0) {
-				const indexOf = studentsArray[studentsArray.length - 1].id.indexOf("-");
-				idString += parseInt(studentsArray[studentsArray.length - 1].id.slice(indexOf + 1)) + 1;
-			} else {
-				idString += "1";
-			}
+			let htmlString = `<h3>${name}</h3><p>${course.title}</p>`;
+			htmlString += course.moduleList.map(module => `<p>${module}: N/A</p>`).join('');
 
-			htmlString += `<p>${course.title}</p>`;
-			
-			for (const module of course.modules) {
-				htmlString += `<p>${module}: N/A</p>`;
-			}
-			
 			card.setAttribute("id", idString);
 			card.setAttribute("class", "card");
 			card.innerHTML = htmlString;
 
-            this.id = idString;
+			course.studentList.push(this);
+			this.id = idString;
 			this.name = name;
 			this.course = course;
-			this.scores = {[course.title]: {}};
-			for (const module of course.modules) {
+			this.scores = { [course.title]: {} };
+			for (const module of course.moduleList) {
 				this.scores[course.title][module] = null;
 			}
 			this.card = card;
 		}
 
-		adjustCourse(course) {
+		updateCourse(course) {
 			this.course = course;
 
 			if (!Object.keys(this.scores).includes(course.title)) {
 				this.scores[course.title] = {};
-				for (const module of course.modules) {
+				for (const module of course.moduleList) {
 					this.scores[course.title][module] = null;
 				}
 			}
 		}
 
-        adjustCard() {
+		updateCard() {
 			let htmlString = `<h3>${this.name}</h3>`;
-
-			for (const [title, modules] of Object.entries(this.scores)) {
-				htmlString += `<h4>${title}</h4>`;
-				for (const [module, score] of Object.entries(modules)) {
-					htmlString += `<p class="module">${module}: ${score === null ? "N/A" : score}</p>`;
-				}
-			}
-
-            this.card.innerHTML = htmlString;
-        }
+			htmlString += Object.entries(this.scores)
+				.map(([title, moduleList]) => `
+					<h4>${title}</h4>
+					${Object.entries(moduleList)
+						.map(([module, score]) => `
+							<p class="module">${module}: ${score === null ? "N/A" : score}</p>
+						`)
+						.join('')}
+				`)
+				.join('');
+			this.card.innerHTML = htmlString;
+		}
 	}
 </script>
