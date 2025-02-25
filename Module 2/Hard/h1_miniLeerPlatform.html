@@ -118,6 +118,7 @@ Vereisten:
 	</div>
 </div>
 
+<script src="/utils.js"></script>
 <script>
 	"use strict";
 
@@ -195,7 +196,7 @@ Vereisten:
 
 		let course;
 		let student;
-		
+
 		switch (inputField.id) {
 			case "courses":
 				course = courseList.find(c => c.title === inputList.courseTitle);
@@ -203,7 +204,6 @@ Vereisten:
 				// Create new course instance if one isn't found, adjust otherwise
 				if (course === undefined) {
 					courseList.push(new Course(inputList.courseTitle, inputList.courseDesc));
-
 					updateSelectOptions("coursePicker", courseList);
 				} else {
 					course.description = inputList.courseDesc;
@@ -219,7 +219,6 @@ Vereisten:
 				// Create new student instance if one isn't found, adjust otherwise
 				if (student === undefined) {
 					studentList.push(new Student(inputList.studentName, course));
-
 					updateSelectOptions("studentPicker", studentList);
 					updateSelectOptions("reportStudent", studentList);
 				} else {
@@ -231,25 +230,28 @@ Vereisten:
 			case "grades":
 				student = studentList.find(s => s.name === inputList.studentPicker);
 
-				student.scores[student.course.title][inputList.modulePicker] = inputList.moduleGrade;
-				student.updateCard();
+				// Adjust student scores if one is found, ignore otherwise
+				if (student === undefined) {
+					console.log("Student wasn't found. 1");
+				} else {
+					student.scores[student.course.title][inputList.modulePicker] = inputList.moduleGrade;
+					student.updateCard();
+				}
 				break;
 			case "reports":
 				student = studentList.find(s => s.name === inputList.reportStudent);
 
-				inputList.reportOutput.replaceChildren();
-				inputList.reportOutput.appendChild(student.card);
+				// Display student card if one is found, ignore otherwise
+				if (student === undefined) {
+					console.log("Student wasn't found. 2");
+				} else {
+					inputList.reportOutput.replaceChildren();
+					inputList.reportOutput.appendChild(student.card);
+				}
 				break;
 			default:
 				console.log("Unexpected case.");
 				break;
-		}
-	}
-
-	function updateOutputList(targetElement, outputList) {
-		targetElement.replaceChildren();
-		for (const item of outputList) {
-			targetElement.appendChild(item.card);
 		}
 	}
 
@@ -290,10 +292,6 @@ Vereisten:
 		// Manually trigger a "change" event
 		const event = new Event('change');
 		select.dispatchEvent(event);
-	}
-
-	function getRandomInt(min = 0, max = 20) {
-		return Math.round(Math.random() * (max - min)) + min;
 	}
 
 	class Course {
