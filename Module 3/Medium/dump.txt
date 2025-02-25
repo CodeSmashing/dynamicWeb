@@ -1,0 +1,189 @@
+<style>
+	#myTweet {
+		width: 150px;
+	}
+</style>
+
+[Example taken from: https://help.x.com/en/using-x/how-to-embed-a-post]
+<div id="myTweet">
+	<article role="article" tabindex="0"><a
+			href="https://twitter.com/Support/status/1141039841993355264?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+			rel="noopener noreferrer nofollow" target="_blank" aria-label="Visit this post on X" role="link"></a>
+		<div>
+			<div>
+				<div style="height: 48px; width: 48px;" data-testid="UserAvatar-Container-Support">
+					<div style="padding-bottom: 100%;"></div>
+					<div>
+						<div>
+							<div style="padding-bottom: 100%;"></div>
+							<div>
+								<div style="height: calc(100% + 4px); width: calc(100% + 4px);"><a
+										href="https://twitter.com/Support?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+										rel="noopener noreferrer nofollow" target="_blank" aria-hidden="true"
+										role="link" tabindex="-1" style="background-color: rgba(0, 0, 0, 0);">
+										<div style="height: calc(100% - 4px); width: calc(100% - 4px);">
+											<div style="background-color: rgba(0, 0, 0, 0);"></div>
+										</div>
+										<div style="height: calc(100% - 4px); width: calc(100% - 4px);">
+											<div></div>
+										</div>
+										<div style="height: calc(100% - 4px); width: calc(100% - 4px);">
+											<div style="">
+												<div style="padding-bottom: 100%;"></div>
+												<div>
+													<div aria-label="">
+														<div
+															style="background-image: url(&quot;https://pbs.twimg.com/profile_images/1683508200069296129/KM80Wkfx_normal.jpg&quot;);">
+														</div><img alt="" draggable="true"
+															src="https://pbs.twimg.com/profile_images/1683508200069296129/KM80Wkfx_normal.jpg">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div style="height: calc(100% - 4px); width: calc(100% - 4px);">
+											<div>
+											</div>
+										</div>
+									</a></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>
+					<div>
+						<div><a href="https://twitter.com/Support?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+								rel="noopener noreferrer nofollow" target="_blank" role="link">
+								<div>
+									<div dir="auto" style=""><span><span>Support</span><span></span></span>
+									</div>
+									<div dir="auto" style=""><span><svg viewBox="0 0 22 22"
+												aria-label="Verified account" role="img"
+												data-testid="icon-verified">
+												<g>
+													<path
+														d="M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816zM9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z">
+													</path>
+												</g>
+											</svg>
+											<div tabindex="0" role="link">
+												<div style="height: calc(1.0625em); width: calc(1.0625em);">
+													<div>
+														<div style="padding-bottom: 100%;">
+														</div>
+														<div>
+															<div style="border-radius: 2px;">
+																<div
+																	style="background-image: url(&quot;https://pbs.twimg.com/profile_images/1683899100922511378/5lY42eHs_bigger.jpg&quot;);">
+																</div><img alt="" draggable="false"
+																	src="https://pbs.twimg.com/profile_images/1683899100922511378/5lY42eHs_bigger.jpg">
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</span></div>
+								</div>
+							</a>
+							<div><a href="https://twitter.com/Support?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+									rel="noopener noreferrer nofollow" target="_blank" role="link" tabindex="-1">
+									<div>
+										<div dir="ltr" style=""><span>@Support</span>
+										</div>
+									</div>
+								</a>
+								<div>
+									<div dir="auto" aria-hidden="true" style=""><span>·</span></div><a
+										href="https://twitter.com/intent/follow?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post&amp;screen_name=Support"
+										dir="auto" rel="noopener noreferrer nofollow" target="_blank" role="link"
+										style="color: rgb(0, 111, 214);"><span>Follow</span></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><a
+				href="https://twitter.com/Support/status/1141039841993355264?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+				rel="noopener noreferrer nofollow" target="_blank" aria-label="View on X" role="link"><svg
+					viewBox="0 0 24 24" aria-hidden="true">
+					<g>
+						<path
+							d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z">
+						</path>
+					</g>
+				</svg></a>
+		</div>
+		<div>
+			<div dir="auto" lang="en" data-testid="tweetText"><span>Most people
+					don't tag their precise location in Tweets, so we're removing this ability to simplify your
+					Tweeting
+					experience. You'll still be able to tag your precise location in Tweets through our updated
+					camera.
+					It's helpful when sharing on-the-ground moments.</span></div>
+		</div>
+		<div>
+			<div dir="auto">
+				<div>
+					<div><span style=""><a
+								href="https://twitter.com/Support/status/1141039841993355264?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+								rel="noopener noreferrer nofollow" target="_blank"
+								aria-label="7:47 PM · Jun 18, 2019" role="link" style=""><time
+									datetime="2019-06-18T17:47:52.000Z">7:47 PM · Jun 18,
+									2019</time></a></span></div>
+				</div>
+			</div><a href="https://help.twitter.com/en/twitter-for-websites-ads-info-and-privacy"
+				rel="noopener noreferrer nofollow" target="_blank" aria-label="X Ads info and privacy"
+				role="link"><svg viewBox="0 0 24 24" aria-hidden="true">
+					<g>
+						<path
+							d="M13.5 8.5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5S11.17 7 12 7s1.5.67 1.5 1.5zM13 17v-5h-2v5h2zm-1 5.25c5.66 0 10.25-4.59 10.25-10.25S17.66 1.75 12 1.75 1.75 6.34 1.75 12 6.34 22.25 12 22.25zM20.25 12c0 4.56-3.69 8.25-8.25 8.25S3.75 16.56 3.75 12 7.44 3.75 12 3.75s8.25 3.69 8.25 8.25z">
+						</path>
+					</g>
+				</svg></a>
+		</div>
+		<div><a href="https://twitter.com/intent/like?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post&amp;tweet_id=1141039841993355264"
+				rel="noopener noreferrer nofollow" target="_blank" aria-label="Like. This post has 1.5K likes"
+				role="link">
+				<div tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true">
+						<g>
+							<path
+								d="M20.884 13.19c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z">
+							</path>
+						</g>
+					</svg></div>
+				<div dir="auto">
+					<span>1.5K</span>
+				</div>
+			</a><a
+				href="https://twitter.com/intent/tweet?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post&amp;in_reply_to=1141039841993355264"
+				rel="noopener noreferrer nofollow" target="_blank" aria-label="Reply to this post on X" role="link">
+				<div tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true">
+						<g>
+							<path
+								d="M1.751 10c0-4.42 3.584-8 8.005-8h4.366c4.49 0 8.129 3.64 8.129 8.13 0 2.96-1.607 5.68-4.196 7.11l-8.054 4.46v-3.69h-.067c-4.49.1-8.183-3.51-8.183-8.01z">
+							</path>
+						</g>
+					</svg></div>
+				<div dir="auto">
+					<span>Reply</span>
+				</div>
+			</a>
+			<div role="button" tabindex="0">
+				<div tabindex="-1"><svg viewBox="0 0 24 24" aria-hidden="true" style="">
+						<g>
+							<path
+								d="M18.36 5.64c-1.95-1.96-5.11-1.96-7.07 0L9.88 7.05 8.46 5.64l1.42-1.42c2.73-2.73 7.16-2.73 9.9 0 2.73 2.74 2.73 7.17 0 9.9l-1.42 1.42-1.41-1.42 1.41-1.41c1.96-1.96 1.96-5.12 0-7.07zm-2.12 3.53l-7.07 7.07-1.41-1.41 7.07-7.07 1.41 1.41zm-12.02.71l1.42-1.42 1.41 1.42-1.41 1.41c-1.96 1.96-1.96 5.12 0 7.07 1.95 1.96 5.11 1.96 7.07 0l1.41-1.41 1.42 1.41-1.42 1.42c-2.73 2.73-7.16 2.73-9.9 0-2.73-2.74-2.73-7.17 0-9.9z">
+							</path>
+						</g>
+					</svg></div>
+				<div dir="auto" style=""><span>Copy link</span></div>
+			</div>
+		</div>
+		<div><a href="https://twitter.com/Support/status/1141039841993355264?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1141039841993355264%7Ctwgr%5Ea3ce94b9d0c70d03f0fbdcee5c81af1c6ccbae6b%7Ctwcon%5Es1_&amp;ref_url=https%3A%2F%2Fhelp.x.com%2Fen%2Fusing-x%2Fhow-to-embed-a-post"
+				rel="noopener noreferrer nofollow" target="_blank" role="link">
+				<div dir="auto" style="color: rgb(0, 111, 214);"><span><span>Read 946 replies</span></span>
+				</div>
+			</a></div>
+	</article>
+</div>
