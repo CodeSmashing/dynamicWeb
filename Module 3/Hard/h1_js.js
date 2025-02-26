@@ -1,56 +1,116 @@
-const inputNameElement = document.querySelector("#playerName");
+"use strict";
+
+const interfaceControlContainer = document.querySelector("#controls");
+const inputControlList = [
+	interfaceControlContainer.querySelector("#playerName"),
+	interfaceControlContainer.querySelector("#createPlayer"),
+	interfaceControlContainer.querySelector("#doDamage"),
+	interfaceControlContainer.querySelector("#levelUp")
+];
 const outputStats = document.querySelector("#playerStats");
 const playerList = [];
-let incrementalId = 1;
-let currentPlayer;
+let incrementalNameId = 1;
+let currentPlayer = {};
+let baseLevel = 1;
+let baseHealth = 100;
+let baseDamage = 25;
 
-const findPlayer = () => {
-	const inputName = inputNameElement.value;
-	const player = playerList.find(p => p.name === inputName);
-	if (player !== undefined) return currentPlayer = player;
+const findPlayer = (inputName = currentPlayer.name) => {
+	const player = playerList.find((p) => p.name === inputName);
+	if (player !== undefined) {
+		currentPlayer = player;
+		updatePlayerStats();
+		return currentPlayer;
+	}
 
 	return undefined;
 };
 
-const createNewPlayer = () => {
-	const newPlayer = {
-		name: inputNameElement.value !== "" ? inputNameElement.value : `Player ${incrementalId++}`,
-		level: 1,
-		health: 100
-	}
+const updatePlayerStats = () => {
+	outputStats.replaceChildren();
+	outputStats.appendChild(currentPlayer.card);
+};
 
-	// Only add if we don't have a duplicate
-	if (findPlayer() !== undefined) return alert("We already have a player with that name.");
-	currentPlayer = newPlayer
-	playerList.push(currentPlayer);
-	updatePlayerStats(currentPlayer);
-}
+const createPlayer = () => {
+	const inputName = interfaceControlContainer.querySelector("#playerName").value;
+	if (inputName === "") return alert("The name input was left empty.");
+	if (findPlayer(inputName) !== undefined) return alert("We already have a player with that name.");
+	currentPlayer = new Player(inputName);
+	updatePlayerStats();
+};
 
-const doDamageToPlayer = () => {
-	if (findPlayer() === undefined) return alert("No player could be found with that name.");
-
-	currentPlayer.health -= 25;
+const doDamage = () => {
+	if (findPlayer() === undefined) return alert("Can't do damage to a none-existant player.");
+	currentPlayer.health -= baseDamage;
 	if (currentPlayer.health <= 0) {
-		currentPlayer.health = 100;
+		currentPlayer.health = baseHealth;
 		currentPlayer.level--;
 	}
-	updatePlayerStats(currentPlayer);
-}
+	currentPlayer.updateCard();
+};
 
-const levelPlayerUp = () => {
-	if (findPlayer() === undefined) return alert("No player could be found with that name.");
-
+const levelUp = () => {
+	if (findPlayer() === undefined) return alert("Can't level up a none-existant player.");
 	currentPlayer.level++;
-	currentPlayer.health = 100;
-	updatePlayerStats(currentPlayer);
+	currentPlayer.health = baseHealth;
+	currentPlayer.updateCard();
+};
+
+const handleInput = (input) => {
+	switch (input.id) {
+		case "createPlayer":
+			createPlayer();
+			break;
+		case "doDamage":
+			doDamage();
+			break;
+		case "levelUp":
+			levelUp();
+			break;
+		default:
+			alert("We haven't considerd that case yet.");
+			break;
+	}
+};
+
+for (const input of inputControlList) {
+	if (input.tagName === "BUTTON") input.addEventListener("click", () => handleInput(input));
+	if (input.id === "doDamage") {
+		const outputDamageSpan = input.querySelector("#damageTotal");
+		outputDamageSpan.textContent = baseDamage;
+	}
 }
 
-function updatePlayerStats(player) {
-	let htmlStrong = `
-	<p>Name: ${player.name}</p>
-	<p>Level: ${player.level}</p>
-	<p>Health: ${player.health}</p>`;
+class Player {
+	constructor(name = `Player ${incrementalNameId++}`) {
+		const card = document.createElement("div");
+		const lastPlayer = playerList[Math.max(playerList.length - 1, 0)];
+		const indexOf = lastPlayer === undefined ? undefined : lastPlayer.id.indexOf("-");
+		const idString = lastPlayer === undefined ? "player-1" : "player-" + (parseInt(lastPlayer.id.slice(indexOf + 1)) + 1);
 
-	outputStats.innerHTML = htmlStrong;
+		const htmlString = `
+		<h3>Stats</h3>
+		<p>Name: ${name}</p>
+		<p>Level: ${baseLevel}</p>
+		<p>Health: ${baseHealth}</p>`;
+
+		card.innerHTML = htmlString;
+
+		playerList.push(this);
+		this.id = idString;
+		this.name = name;
+		this.level = baseLevel;
+		this.health = baseHealth;
+		this.card = card;
+	}
+
+	updateCard() {
+		const htmlString = `
+		<h3>Stats</h3>
+		<p>Name: ${this.name}</p>
+		<p>Level: ${this.level}</p>
+		<p>Health: ${this.health}</p>`;
+
+		this.card.innerHTML = htmlString;
+	}
 }
-

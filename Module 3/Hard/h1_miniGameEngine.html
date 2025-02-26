@@ -27,11 +27,11 @@ HTML om mee te starten:
 </head>
 
 <body>
-    <div class="controls">
+    <div class="controls" id="controls">
         <input type="text" id="playerName" placeholder="Speler naam">
-        <button onclick="createNewPlayer()">Nieuwe Speler</button>
-        <button onclick="doDamageToPlayer()">Doe Schade (25)</button>
-        <button onclick="levelPlayerUp()">Level Up</button>
+        <button id="createPlayer">Nieuwe Speler</button>
+        <button id="doDamage">Doe Schade (<span id="damageTotal"></span>)</button>
+        <button id="levelUp">Level Up</button>
     </div>
     <div id="playerStats"></div>
 </body>
