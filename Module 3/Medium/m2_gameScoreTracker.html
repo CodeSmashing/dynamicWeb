@@ -1,4 +1,5 @@
-<!--Game Score Tracker
+<!--
+Game Score Tracker
 
 Maak een score tracking systeem met validatie.
 
@@ -21,3 +22,26 @@ Valideer de input:
 
 Return een scoreobject
 -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Score Tracker</title>
+</head>
+
+<body>
+    <h1>Game Score Tracker</h1>
+    <div>
+        <input type="text" id="playerName" placeholder="Speler naam">
+        <input type="number" id="score" placeholder="Score">
+        <button onclick="addScore()">Voeg Score Toe</button>
+    </div>
+    <div id="scoreBoard"></div>
+</body>
+
+<script src="m2_js.js"></script>
+
+</html>
