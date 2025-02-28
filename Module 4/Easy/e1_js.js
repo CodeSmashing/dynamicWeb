@@ -28,6 +28,7 @@ studentList[1].addScore("Quantum Physics: Theory and Applications", 32);
 console.log("New average of student 2: ", studentList[1].average());
 
 let htmlString = "";
-htmlString += studentList[0].showReport();
-htmlString += studentList[1].showReport();
+for (const student of studentList) {
+	htmlString += student.showReport();
+}
 outputElement.innerHTML = htmlString;
