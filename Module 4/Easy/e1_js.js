@@ -20,15 +20,14 @@ const studentList = [
 console.log("Average of student 1: ", studentList[0].average());
 studentList[0].addScore("Calculus II: Integration Techniques", 14);
 studentList[0].addScore("World History: Ancient Civilizations", 1945);
-studentList[0].addScore(0, 1945); // Doesn't set anything
+studentList[0].addScore(0, 1945); // Meant to not set anything
 console.log("New average of student 1: ", studentList[0].average());
 
 console.log("Average of student 2: ", studentList[1].average());
 studentList[1].addScore("Quantum Physics: Theory and Applications", 32);
 console.log("New average of student 2: ", studentList[1].average());
 
-let htmlString = "";
+outputElement.replaceChildren();
 for (const student of studentList) {
-	htmlString += student.showReport();
+	outputElement.appendChild(student.showReport());
 }
-outputElement.innerHTML = htmlString;
