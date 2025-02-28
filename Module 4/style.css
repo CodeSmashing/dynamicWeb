@@ -1,0 +1,8 @@
+.card {
+	background-color:cadetblue;
+	max-width: fit-content;
+	margin: 10px;
+	padding: 10px 30px;
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px 0px black;
+}
