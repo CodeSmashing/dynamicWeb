@@ -8,7 +8,7 @@ class Motor extends Vehicle {
 
 	rent() {
 		super.rent();
-		if (!this.availability) return `Sorry, but this ${this.brand} ${this.model} is already rented our.`;
+		if (this.availability) return `Sorry, but this ${this.brand} ${this.model} is already rented our.`;
 
 		this.availability = false;
 		return `Motor ${this.brand} ${this.model} (${this.year}), ${this.type}, ${this.cylinderCapacity}L cylinder capacity, is now yours.`;

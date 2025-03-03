@@ -9,7 +9,7 @@ class Car extends Vehicle {
 
 	rent() {
 		super.rent();
-		if (!this.availability) return `Sorry, but this ${this.brand} ${this.model} is already rented our.`;
+		if (this.availability) return `Sorry, but this ${this.brand} ${this.model} is already rented our.`;
 
 		this.availability = false;
 		return `Car ${this.brand} ${this.model} (${this.year}), ${this.type}, ${this.numberOfDoors} Doors, ${this.fuelType} is now yours.`;
