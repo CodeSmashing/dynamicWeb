@@ -1,8 +1,53 @@
 .card {
-	background-color:cadetblue;
+	background-color: cadetblue;
 	max-width: fit-content;
 	margin: 10px;
 	padding: 10px 30px;
 	border-radius: 5px;
 	box-shadow: 5px 5px 10px 0px black;
+}
+
+table {
+	border-collapse: collapse;
+
+	th {
+		background-color: rgb(212, 212, 212);
+	}
+	td:nth-child(even) {
+		background-color: rgb(237, 237, 237);
+	}
+
+	th,
+	td {
+		padding: 5px;
+		border: 1px solid black;
+	}
+
+	th[data-content="Rent Options"] {
+		width: 150px;
+	}
+
+	td.options {
+		white-space: nowrap;
+
+		> :first-child {
+			margin-right: 10px;
+		}
+
+		button {
+			background-color: rgb(159, 159, 159);
+			font-weight: bold;
+			width: calc(50% - 5px);
+			border: 1px solid black;
+			border-radius: 3px;
+
+			&:hover:not(:disabled) {
+				background-color: rgb(209, 209, 209);
+			}
+
+			&:active:not(:disabled) {
+				background-color: rgb(159, 159, 159);
+			}
+		}
+	}
 }

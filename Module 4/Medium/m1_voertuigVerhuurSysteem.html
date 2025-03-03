@@ -1,0 +1,40 @@
+<!--
+Voertuig Verhuur Systeem
+
+Bouw een tool die social media berichten formatteert met arrow functions.
+
+HTML om mee te starten:
+
+<div id="output"></div>
+
+1. Maak een basis Voertuig class met eigenschappen: merk, model, jaar, verhuurPrijs en beschikbaar (Boolean)
+2. Maak een methode verhuur() die de beschikbaarheid op false zet en een bericht teruggeeft
+3. Maak een methode retourneer() die de beschikbaarheid op true zet en een bericht teruggeeft
+4. Maak een Auto subclass die extra eigenschappen heeft zoals aantalDeuren en brandstofType
+5. Maak een Motor subclass met extra eigenschappen zoals cilinderinhoud en type (sport, tour, etc.)
+6. Overschrijf de verhuur methode in beide subclasses om extra specifieke informatie in het bericht op te nemen
+7. Maak meerdere instanties van zowel auto's als motoren
+8. Toon een overzicht van alle voertuigen in een HTML tabel met details en verhuurstatus
+9. Voeg functionaliteit toe om voertuigen te verhuren en retourneren, en toon de berichten hiervan
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Voertuig Verhuur Systeem</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<div id="output"></div>
+</body>
+
+<script src="./Vehicle.js"></script>
+<script src="./Car.js"></script>
+<script src="./Motor.js"></script>
+<script src="./m1_js.js"></script>
+
+</html>
