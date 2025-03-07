@@ -1,0 +1,38 @@
+<!--
+Bankrekening Systeem
+
+<div id="accounts"></div>
+<div id="transactions"></div> 
+
+1. Maak een Bankrekening class met eigenschappen voor rekeningnummer, eigenaar, en saldo
+2. Voeg getters toe voor alle eigenschappen en een setter voor saldo die voorkomt dat het saldo negatief wordt
+3. Maak methodes storten(bedrag) en opnemen(bedrag) die het saldo aanpassen en succes/mislukt berichten teruggeven
+4. Maak een getter overzicht die een string met rekeninginformatie teruggeeft
+5. Maak een Spaarrekening subclass met een extra rentepercentage eigenschap
+6. Voeg aan de Spaarrekening een renteToevoegen() methode toe die het saldo verhoogt op basis van het rentepercentage
+7. Maak een static methode rekeningNrGenerator() in de Bankrekening class die unieke rekeningnummers genereert
+8. Maak een static methode validerenTransactie(from, to, bedrag) die controleert of een transactie tussen rekeningen mogelijk is
+9. Maak enkele rekeningen aan en voer verschillende transacties uit (storten en opnemen)
+10. Toon het overzicht van alle rekeningen en de uitgevoerde transacties
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Banking System</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<div id="accounts"></div>
+	<div id="transactions"></div>
+</body>
+
+<script src="./Bankaccount.js"></script>
+<script src="./Savingsaccount.js"></script>
+<script src="./m2_js.js"></script>
+
+</html>

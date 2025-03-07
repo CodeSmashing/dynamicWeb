@@ -1,0 +1,87 @@
+<!--M1: Image Loader
+
+Gebruik Promises om meerdere afbeeldingen sequentieel te laden.
+
+Creëer een functie die drie afbeeldingen één voor één laadt en deze in een galerij toont. Na het laden van elke afbeelding moet een voortgangsindicator worden bijgewerkt. Gebruik Promises om deze asynchrone acties te beheren.
+
+<style>
+    .gallery { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 10px; 
+    }
+    .gallery img { 
+      width: 200px; 
+      height: 200px; 
+      object-fit: cover; 
+    }
+    .progress {
+      width: 100%;
+      background-color: #ddd;
+      margin: 10px 0;
+    }
+    .progress-bar {
+      height: 20px;
+      background-color: #4CAF50;
+      text-align: center;
+      line-height: 20px;
+      color: white;
+    }
+</style>
+<h1>Afbeeldingen Galerij</h1>
+<div class="progress">
+    <div class="progress-bar" style="width: 0%">0%</div>
+</div>
+<button id="loadButton">Laad afbeeldingen</button>
+<div class="gallery"></div>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Image Loader</title>
+</head>
+
+<style>
+	.gallery {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.gallery img {
+		width: 200px;
+		height: 200px;
+		object-fit: cover;
+	}
+
+	.progress {
+		width: 100%;
+		background-color: #ddd;
+		margin: 10px 0;
+	}
+
+	.progress-bar {
+		height: 20px;
+		background-color: #4CAF50;
+		text-align: center;
+		line-height: 20px;
+		color: white;
+	}
+</style>
+
+<body>
+	<h1>Afbeeldingen Galerij</h1>
+	<div class="progress">
+		<div class="progress-bar" style="width: 0%">0%</div>
+	</div>
+	<button id="loadButton">Laad afbeeldingen</button>
+	<div class="gallery"></div>
+</body>
+
+<script src="./m1_js.js"></script>
+
+</html>
