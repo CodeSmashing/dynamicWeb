@@ -51,3 +51,8 @@ table {
 		}
 	}
 }
+
+#accounts,
+#transactions {
+	display: flex;
+}

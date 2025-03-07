@@ -1,0 +1,16 @@
+.message {
+	&.info {
+		background-color: blue;
+		color: yellow;
+	}
+
+	&.success {
+		background-color: green;
+		color: white;
+	}
+
+	&.error {
+		background-color: red;
+		color: black;
+	}
+}
