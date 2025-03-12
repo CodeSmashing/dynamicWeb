@@ -40,22 +40,23 @@ Vereisten:
 </style>
 
 <div id="shoppingCart">
-    <div id="addProduct">
-        <input type="text" id="productName" placeholder="Product naam">
-        <input type="number" id="productPrice" placeholder="Prijs">
-        <button id="addToCart">Voeg toe aan winkelwagen</button>
-    </div>
+	<div id="addProduct">
+		<input type="text" id="productName" placeholder="Product naam">
+		<input type="number" id="productPrice" placeholder="Prijs">
+		<button id="addToCart">Voeg toe aan winkelwagen</button>
+	</div>
 
-    <div id="cartControls">
-        <button id="sortByPrice">Sorteer op prijs</button>
-        <p>Totaal: €<span id="total">0.00</span></p>
-    </div>
+	<div id="cartControls">
+		<button id="sortByPrice">Sorteer op prijs</button>
+		<p>Totaal: €<span id="total">0.00</span></p>
+	</div>
 
-    <ul id="cartItems"></ul>
+	<ul id="cartItems"></ul>
 </div>
 
-<script>
+<script type="module">
 	"use strict";
+	import { updateOutputList } from "/utils.js";
 
 	const inputName = document.querySelector("#productName");
 	const inputPrice = document.querySelector("#productPrice");
