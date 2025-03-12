@@ -1,0 +1,70 @@
+<!--
+E1: Tekst ophalen met Fetch
+
+Maak een eenvoudige applicatie die een tekstbestand ophaalt en de inhoud toont op de webpagina.
+
+<h ead>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #resultaat {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</h ead>
+<b ody>
+    <h1>Tekstbestand Ophalen</h1>
+    <button id="haalTekstOp">Haal Tekst Op</button>
+    <div id="resultaat">
+        <p>Klik op de knop om de tekst op te halen...</p>
+    </div>
+</b ody>
+
+1. Maak een JavaScript bestand (script.mjs) dat een tekstbestand ophaalt van de URL: "https://jsonplaceholder.typicode.com/posts/1"
+2. Wanneer de gebruiker op de knop "Haal Tekst Op" klikt, moet de fetch-operatie starten
+3. Transformeer de JSON-response naar plaintext door de titel en body uit de response te halen en die netjes te formatteren
+4. Toon de geformatteerde tekst in het resultaat-div
+5. Zorg voor foutafhandeling. Als er iets misgaat, toon dan een vriendelijke foutmelding in het resultaat-div met de klasse 'error'
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tekst Ophalen met Fetch</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<h1>Tekstbestand Ophalen</h1>
+	<button id="haalTekstOp">Haal Tekst Op</button>
+	<div id="resultaat">
+		<p>Klik op de knop om de tekst op te halen...</p>
+	</div>
+</body>
+
+<script src="./e1_js.js"></script>
+
+</html>
