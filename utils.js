@@ -13,7 +13,7 @@ export async function getData(url) {
 		if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 		return await response.json();
 	} catch (error) {
-		console.error(`Error bij het ophalen van de data: ${error.message}`);
+		console.error(`Error bij het ophalen van de data: ${error.message}`, error);
 		throw error; // Re-throw the error
 	}
 }
@@ -24,6 +24,11 @@ export function createElement(tagName, options = {}) {
 		switch (key) {
 			case "textContent":
 				element.textContent = value;
+				break;
+			case "classList":
+				for (const classValue of value) {
+					element.classList.add(classValue);
+				}
 				break;
 			default:
 				console.warn(`Unhandled property: ${key}`); // console.warn();
