@@ -1,0 +1,100 @@
+<!--M1: HTTP Status Code Handler
+
+Bouw een applicatie die verschillende HTTP-endpoints test en toont hoe verschillende statuscodes worden afgehandeld.
+
+<h ead>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .endpoint-lijst {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .endpoint-knop {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .resultaat-container {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+        .status-success { color: green; }
+        .status-redirect { color: orange; }
+        .status-client-error { color: red; }
+        .status-server-error { color: darkred; }
+    </style>
+</h ead>
+<b ody>
+    <h1>HTTP Status Tester</h1>
+    <p>Klik op de verschillende endpoints om HTTP-statussen te testen:</p>
+    
+    <div class="endpoint-lijst">
+        <div class="endpoint-knop" data-code="200">200 OK</div>
+        <div class="endpoint-knop" data-code="301">301 Redirect</div>
+        <div class="endpoint-knop" data-code="404">404 Not Found</div>
+        <div class="endpoint-knop" data-code="500">500 Server Error</div>
+    </div>
+    
+    <div class="resultaat-container">
+        <h3>Resultaat:</h3>
+        <div id="status-info">Selecteer een endpoint om te testen...</div>
+        <pre id="response-details"></pre>
+    </div>
+</b ody>
+
+1. Maak een JavaScript bestand (script.js) dat fetch-verzoeken uitvoert naar "https://httpstat.us/{code}" wanneer een gebruiker op een endpoint-knop klikt
+2. Vervang {code} door de waarde van het data-code attribuut van de aangeklikte knop
+3. Toon in het status-info element de volgende gegevens:
+	• Statuscode en tekst (bijv. "200 OK")
+	• Of de aanvraag succesvol was (response.ok)
+	• De categoriegroep van de statuscode (200s, 300s, 400s, 500s) en markeer met de juiste klasse
+4. Toon in het response-details element de volgende gegevens:
+	• Alle response headers (gebruik response.headers)
+	• Response type
+	• Toon deze informatie geformatteerd
+5. Zorg voor goede foutafhandeling als het netwerk faalt
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTTP Status Code Handler</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>HTTP Status Tester</h1>
+    <p>Klik op de verschillende endpoints om HTTP-statussen te testen:</p>
+    
+    <div class="endpoint-lijst">
+        <div class="endpoint-knop" data-code="200">200 OK</div>
+        <div class="endpoint-knop" data-code="301">301 Redirect</div>
+        <div class="endpoint-knop" data-code="404">404 Not Found</div>
+        <div class="endpoint-knop" data-code="500">500 Server Error</div>
+    </div>
+    
+    <div class="resultaat-container">
+        <h3>Resultaat:</h3>
+        <div id="status-info">Selecteer een endpoint om te testen...</div>
+        <pre id="response-details"></pre>
+    </div>
+</body>
+
+<script type="module" src="./m1_js.js"></script>
+
+</html>

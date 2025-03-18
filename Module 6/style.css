@@ -57,3 +57,31 @@ button {
 	text-align: center;
 	padding: 20px;
 }
+
+.endpoint-lijst {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: 10px;
+	margin-bottom: 20px;
+}
+
+.endpoint-knop {
+	padding: 10px;
+	background-color: #f1f1f1;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	cursor: pointer;
+	text-align: center;
+}
+
+.resultaat-container {
+	padding: 15px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	margin-top: 20px;
+}
+
+.status-success { color: green; }
+.status-redirect { color: orange; }
+.status-client-error { color: red; }
+.status-server-error { color: darkred; }
