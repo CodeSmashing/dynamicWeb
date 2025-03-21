@@ -1,0 +1,15 @@
+body.dark-theme {
+	background-color: #333;
+	color: #fff;
+}
+
+body.light-theme {
+	background-color: #fff;
+	color: #333;
+}
+
+.theme-button {
+	padding: 10px;
+	margin: 20px;
+	cursor: pointer;
+}
