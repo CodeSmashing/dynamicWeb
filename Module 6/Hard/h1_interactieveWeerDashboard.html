@@ -1,0 +1,112 @@
+<!--
+H1: Interactieve Weer-Dashboard
+
+Bouw een interactieve weer-applicatie die gegevens ophaalt van een weer-API en deze visualiseert.
+
+<h ead>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .search-box {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        .search-box button {
+            padding: 8px 16px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        .weather-card {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .favorites {
+            margin-top: 30px;
+        }
+        .favorite-item {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .loading, .error {
+            text-align: center;
+            padding: 20px;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</h ead>
+<b ody>
+    <h1>Weer Dashboard</h1>
+    <div class="search-box">
+        <input type="text" id="city-input" placeholder="Voer een stadsnaam in...">
+        <button id="search-button">Zoek</button>
+    </div>
+
+    <div id="weather-display"></div>
+    
+    <div id="favorites-container" class="favorites">
+        <h2>Favoriete Locaties</h2>
+        <div id="favorites-list"></div>
+    </div>
+</b ody>
+
+1. Maak een JavaScript bestand (script.mjs) dat weergegevens ophaalt van een publieke weer-API naar keuze (bijvoorbeeld: "https://api.openweathermap.org/data/2.5/weather?q={CITY}&units=metric&appid=JOUW_API_SLEUTEL")
+2. Implementeer de volgende functionaliteiten:
+	• Zoekfunctie: Haal weergegevens op voor de ingevoerde stad
+	• Temperatuur: Voeg een knop toe om te schakelen tussen Celsius en Fahrenheit
+	• Foutafhandeling: Toon gebruiksvriendelijke fouten bij mislukte verzoeken
+3. Toon minimaal de volgende weergegevens:
+	• Huidige temperatuur
+	• Weerbeschrijving
+	• Luchtvochtigheid
+	• Windsnelheid
+	• Zonsopgang en zonsondergang (omgezet van UNIX-timestamp naar leesbare tijd)
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactieve Weer-Dashboard</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <h1>Weer Dashboard</h1>
+    <div class="search-box">
+        <input type="text" id="city-input" placeholder="Voer een stadsnaam in...">
+        <button id="search-button">Zoek</button>
+    </div>
+
+    <div id="weather-display"></div>
+
+    <div id="favorites-container" class="favorites">
+        <h2>Favoriete Locaties</h2>
+        <div id="favorites-list"></div>
+    </div>
+</body>
+
+<script type="module" src="./h1_js.js"></script>
+
+</html>
